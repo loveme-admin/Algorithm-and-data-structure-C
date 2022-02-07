@@ -1,1 +1,1 @@
-# Algorithm-and-data-structure-C
+# This is an example of data structure and demonstration
