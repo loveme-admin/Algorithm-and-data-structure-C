@@ -2,8 +2,8 @@
 #include<stdlib.h>
 #include<time.h>
 #define MAX 100//最大数组长度
-#define UP 100//范围上限
-#define DOWN 9//范围下限
+#define UP 20//范围上限
+#define DOWN -20//范围下限
 
 void CreateList(int[], int);
 void PrintList(int[], int);
@@ -28,12 +28,12 @@ void CreateList(int num[], int length)
 {
 	int i = 0;
 	for (i = 0; i < length; i++)
-		num[i] = (rand() % (UP - DOWN)) + DOWN;
+		num[i] = (rand() % (UP+1 - DOWN)) + DOWN;
 }
 void PrintList(int num[], int length)
 {
 	int i = 0;
-	for (i = 0; i < MAX; i++)
+	for (i = 0; i < length; i++)
 		printf("%d ", num[i]);
 	printf("\n");
 }
@@ -344,6 +344,10 @@ void Sort10(int num[], int length)
 		}
 	free(temp_num);
 }
+void Sort11(int num[], int length)
+{
+	;
+}
 void Sort12(int num[], int length)
 {
 	int i = 0, j = 0, temp = 0, sum = 0;
@@ -393,6 +397,7 @@ int main(void)
 		case 8:Sort8(num, MAX); break;
 		case 9:Sort9(num, MAX); break;
 		case 10:Sort10(num, MAX); break;
+		case 11:Sort11(num, MAX); break;
 		case 12:Sort12(num, MAX); break;
 		case -3:PrintList(num, MAX); break;
 		default:printf("Error\n");
