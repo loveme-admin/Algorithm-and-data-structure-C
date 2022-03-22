@@ -2,8 +2,8 @@
 #include<stdlib.h>
 #include<time.h>
 #define MAX 100//最大数组长度
-#define UP 100//范围上限
-#define DOWN 0//范围下限
+#define UP 200//范围上限
+#define DOWN -100//范围下限
 
 void CreateList(int[], int);
 void PrintList(int[], int);
@@ -21,7 +21,7 @@ void Sort8(int[], int);//三路归并
 void Sort8_C(int[], int[], int, int);
 void Sort9(int[], int);//基数排序
 void Sort10(int[], int);//计数排序
-void Sort11(int[], int);//桶排序
+void Sort11(int[], int);//分桶排序
 void Sort12(int[], int);//幸运排序
 
 void CreateList(int num[], int length)
@@ -45,7 +45,7 @@ void HelpList()
 	printf("  5.选择排序      6.大堆排序\n");
 	printf("  7.二路归并      8.三路归并\n");
 	printf("  9.基数排序     10.计数排序\n");
-	printf(" 11.桶排序       12.幸运排序\n");
+	printf(" 11.分桶排序     12.幸运排序\n");
 	printf(" -3.打印线性表    0.退出程序\n");
 }
 
@@ -290,10 +290,10 @@ void Sort9(int num[], int length)
 	while (maxData >= p)
 	{
 		maxData /= 10;
-		++d;
+		d++;
 	}
 
-	int* tmp = (int*)malloc(length * sizeof(int));
+	int* temp = (int*)malloc(length * sizeof(int));
 	int count[10];
 	int i, j, k;
 	int radix = 1;
@@ -311,14 +311,14 @@ void Sort9(int num[], int length)
 		for (j = length - 1; j >= 0; j--)
 		{
 			k = (num[j] / radix) % 10;
-			tmp[count[k] - 1] = num[j];
+			temp[count[k] - 1] = num[j];
 			count[k]--;
 		}
 		for (j = 0; j < length; j++)
-			num[j] = tmp[j];
+			num[j] = temp[j];
 		radix = radix * 10;
 	}
-	free(tmp);
+	free(temp);
 }
 void Sort10(int num[], int length)
 {
@@ -346,7 +346,24 @@ void Sort10(int num[], int length)
 }
 void Sort11(int num[], int length)
 {
-	;
+	int max = num[0], min = num[0];
+	int i = 0, j = 0,k=0,bucket=0;
+	int* temp_num[UP-DOWN/25+1];
+	bucket = (UP - DOWN + 1)/25+1;
+	for (i = 0; i < bucket; i++) 
+		temp_num[i] = (int*)malloc(sizeof(int) * length);
+	int* temp_count= (int*)malloc(bucket * sizeof(int));
+	for (i = 0; i < bucket; i++)
+		temp_count[i] = 0;
+	for (i = 0; i < length; i++)
+		temp_num[(num[i]-DOWN) / 25 ][temp_count[(num[i]-DOWN) / 25 ]++] = num[i];
+	for (i = 0; i < bucket; i++)
+		Sort2(temp_num[i], 0, temp_count[i]-1);
+	for (i = 0; i < bucket; i++)
+		for (k=0;temp_count[i]>0; temp_count[i]--)
+			num[j++] = temp_num[i][k++];
+	for (i = 0; i < bucket; i++)
+		free(temp_num[i]);
 }
 void Sort12(int num[], int length)
 {
