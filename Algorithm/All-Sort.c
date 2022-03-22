@@ -319,7 +319,6 @@ void Sort9(int num[], int length)
 		radix = radix * 10;
 	}
 	free(tmp);
-	free(count);
 }
 void Sort12(int num[], int length)
 {
