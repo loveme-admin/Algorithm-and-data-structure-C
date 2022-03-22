@@ -2,8 +2,8 @@
 #include<stdlib.h>
 #include<time.h>
 #define MAX 100//最大数组长度
-#define UP 20//范围上限
-#define DOWN -20//范围下限
+#define UP 100//范围上限
+#define DOWN 0//范围下限
 
 void CreateList(int[], int);
 void PrintList(int[], int);
