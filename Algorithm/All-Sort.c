@@ -3,7 +3,7 @@
 #include<time.h>
 #define MAX 100//最大数组长度
 #define UP 200//范围上限
-#define DOWN -100//范围下限
+#define DOWN 0//范围下限
 
 void CreateList(int[], int);
 void PrintList(int[], int);
@@ -281,44 +281,30 @@ void Sort8_C(int num[], int temp_num[], int left, int right)
 }
 void Sort9(int num[], int length)
 {
-	int maxData = num[0];
-	int d = 1;
-	int p = 10;
-	for (int i = 1; i < length; ++i)
-		if (maxData < num[i])
-			maxData = num[i];
-	while (maxData >= p)
+	int max = num[0];
+	int i = 0, j=0,k=1,x=0,y=0,bit = 1;
+	int* temp_num[10]; 
+	for(i=0;i<10;i++)
+		temp_num[i] = (int*)malloc(sizeof(int) * length);
+	int* temp_count = (int*)malloc(10 * sizeof(int));
+	for (i = 0; i < 10; i++)
+		temp_count[i] = 0;
+	for (i = 0; i < length; i++)
+		if (max < num[i])
+			max = num[i];
+	while (max / 10 != 0)
 	{
-		maxData /= 10;
-		d++;
+		bit++;
+		max /= 10;
 	}
-
-	int* temp = (int*)malloc(length * sizeof(int));
-	int count[10];
-	int i, j, k;
-	int radix = 1;
-	for (i = 1; i <= d; i++)
+	for(i = 0,k=1; i < bit;i++, k *= 10)
 	{
-		for (j = 0; j < 10; j++)
-			count[j] = 0;
 		for (j = 0; j < length; j++)
-		{
-			k = (num[j] / radix) % 10;
-			count[k]++;
-		}
-		for (j = 1; j < 10; j++)
-			count[j] = count[j - 1] + count[j];
-		for (j = length - 1; j >= 0; j--)
-		{
-			k = (num[j] / radix) % 10;
-			temp[count[k] - 1] = num[j];
-			count[k]--;
-		}
-		for (j = 0; j < length; j++)
-			num[j] = temp[j];
-		radix = radix * 10;
+			temp_num[num[j] / k%10][temp_count[num[j] / k % 10]++] = num[j];
+		for (x = 0,j=0; x < 10; x++)
+			for (y = 0; temp_count[x] > 0; temp_count[x]--)
+				num[j++] = temp_num[x][y++];
 	}
-	free(temp);
 }
 void Sort10(int num[], int length)
 {
@@ -360,7 +346,7 @@ void Sort11(int num[], int length)
 	for (i = 0; i < bucket; i++)
 		Sort2(temp_num[i], 0, temp_count[i]-1);
 	for (i = 0; i < bucket; i++)
-		for (k=0;temp_count[i]>0; temp_count[i]--)
+		for (k=0,j=0;temp_count[i]>0; temp_count[i]--)
 			num[j++] = temp_num[i][k++];
 	for (i = 0; i < bucket; i++)
 		free(temp_num[i]);
