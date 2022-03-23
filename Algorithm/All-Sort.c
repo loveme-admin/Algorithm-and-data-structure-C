@@ -282,34 +282,43 @@ void Sort8_C(int num[], int temp_num[], int left, int right)
 void Sort9(int num[], int length)
 {
 	int max = num[0];
-	int i = 0, j=0,k=1,x=0,y=0,bit = 1;
-	int* temp_num[10]; 
-	for(i=0;i<10;i++)
+	int bit = 1;
+	int p_num=0;
+	int i = 0, j = 0, k = 0;
+	int* temp_num[10];
+	for (i = 0; i < 10; i++)
 		temp_num[i] = (int*)malloc(sizeof(int) * length);
 	int* temp_count = (int*)malloc(10 * sizeof(int));
-	for (i = 0; i < 10; i++)
-		temp_count[i] = 0;
-	for (i = 0; i < length; i++)
-		if (max < num[i])
-			max = num[i];
-	while (max / 10 != 0)
-	{
-		bit++;
-		max /= 10;
+	if (temp_count) {
+		for (i = 0; i < 10; i++)
+			temp_count[i] = 0;
+		for (i = 0; i < length; i++)
+			if (max < num[i])
+				max = num[i];
+		while (max / 10 != 0)
+		{
+			bit++;
+			max /= 10;
+		}
+		for (i = 1; bit--; i *= 10)
+		{
+			for (j = 0; j < length; j++)
+				temp_num[num[j] / i % 10][temp_count[num[j] / i % 10]++] = num[j];
+			for (j = 0, p_num = 0; j < 10; j++)
+				for (k = 0; temp_count[j] > 0; temp_count[j]--)
+					num[p_num++] = temp_num[j][k++];
+		}
+		for (i = 0; i < 10; i++)
+			free(temp_num[i]);
+		free(temp_count);
 	}
-	for(i = 0,k=1; i < bit;i++, k *= 10)
-	{
-		for (j = 0; j < length; j++)
-			temp_num[num[j] / k%10][temp_count[num[j] / k % 10]++] = num[j];
-		for (x = 0,j=0; x < 10; x++)
-			for (y = 0; temp_count[x] > 0; temp_count[x]--)
-				num[j++] = temp_num[x][y++];
-	}
+	else
+		printf("Error\n");
 }
 void Sort10(int num[], int length)
 {
 	int max=num[0], min =num[0];
-	int i = 0,j=0;
+	int i = 0,p_num=0;
 	for (i = 1; i < length; i++)
 	{
 		if (min > num[i])
@@ -318,22 +327,25 @@ void Sort10(int num[], int length)
 			max = num[i];
 	}
 	int *temp_num = (int*)malloc(sizeof(int) *(max - min + 1));
-	for (i = 0; i < max - min +1; i++)
-		temp_num[i] = 0;
-	for (i = 0; i < length; i++)
-		temp_num[num[i] - min]++;
-	for (i = 0; i < max - min + 1; i++)
-		while (temp_num[i])
-		{
-			num[j++] = i + min;
-			temp_num[i]--;
-		}
-	free(temp_num);
+	if (temp_num) {
+		for (i = 0; i < max - min + 1; i++)
+			temp_num[i] = 0;
+		for (i = 0; i < length; i++)
+			temp_num[num[i] - min]++;
+		for (i = 0; i < max - min + 1; i++)
+			while (temp_num[i])
+			{
+				num[p_num++] = i + min;
+				temp_num[i]--;
+			}
+		free(temp_num);
+	}
+	else
+		printf("Error\n");
 }
 void Sort11(int num[], int length)
 {
-	int max = num[0], min = num[0];
-	int i = 0, j = 0,k=0,bucket=0;
+	int i = 0,j=0, p_num = 0,bucket=0;
 	int* temp_num[UP-DOWN/25+1];
 	bucket = (UP - DOWN + 1)/25+1;
 	for (i = 0; i < bucket; i++) 
@@ -346,10 +358,11 @@ void Sort11(int num[], int length)
 	for (i = 0; i < bucket; i++)
 		Sort2(temp_num[i], 0, temp_count[i]-1);
 	for (i = 0; i < bucket; i++)
-		for (k=0,j=0;temp_count[i]>0; temp_count[i]--)
-			num[j++] = temp_num[i][k++];
+		for (j=0;temp_count[i]>0; temp_count[i]--)
+			num[p_num++] = temp_num[i][j++];
 	for (i = 0; i < bucket; i++)
 		free(temp_num[i]);
+	free(temp_count);
 }
 void Sort12(int num[], int length)
 {
