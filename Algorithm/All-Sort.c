@@ -3,8 +3,7 @@
 #include<time.h>
 #define MAX 100//最大数组长度
 #define UP 200//范围上限
-#define DOWN 0//范围下限
-
+#define DOWN -200//范围下限
 void CreateList(int[], int);
 void PrintList(int[], int);
 void HelpList();
@@ -283,18 +282,31 @@ void Sort9(int num[], int length)
 {
 	int max = num[0];
 	int bit = 1;
-	int p_num=0;
+	int p_num = 0;
 	int i = 0, j = 0, k = 0;
-	int* temp_num[10];
+	int* temp_num1[10];
+	int* temp_num2[10];
 	for (i = 0; i < 10; i++)
-		temp_num[i] = (int*)malloc(sizeof(int) * length);
-	int* temp_count = (int*)malloc(10 * sizeof(int));
-	if (temp_count) {
+	{
+		temp_num1[i] = (int*)malloc(sizeof(int) * length);
+		temp_num2[i] = (int*)malloc(sizeof(int) * length);
+	}
+	int* temp_count1 = (int*)malloc(10 * sizeof(int));
+	int* temp_count2 = (int*)malloc(10 * sizeof(int));
+	if (temp_count1 && temp_count2) 
+	{
 		for (i = 0; i < 10; i++)
-			temp_count[i] = 0;
+		{
+			temp_count1[i] = 0;
+			temp_count2[i] = 0;
+		}
 		for (i = 0; i < length; i++)
-			if (max < num[i])
+		{
+			if (max < num[i] && num[i] >= 0)
 				max = num[i];
+			else if (max < (num[i] * -1) && num[i] < 0)
+				max = num[i] * -1;
+		}
 		while (max / 10 != 0)
 		{
 			bit++;
@@ -302,15 +314,38 @@ void Sort9(int num[], int length)
 		}
 		for (i = 1; bit--; i *= 10)
 		{
+			p_num = 0;
 			for (j = 0; j < length; j++)
-				temp_num[num[j] / i % 10][temp_count[num[j] / i % 10]++] = num[j];
-			for (j = 0, p_num = 0; j < 10; j++)
-				for (k = 0; temp_count[j] > 0; temp_count[j]--)
-					num[p_num++] = temp_num[j][k++];
+			{
+				if (num[j] < 0)
+				{
+					num[j] *= -1;
+					temp_num2[num[j] / i % 10][temp_count2[num[j] / i % 10]++] = num[j];
+				}
+				else
+					temp_num1[num[j] / i % 10][temp_count1[num[j] / i % 10]++] = num[j];
+			}
+			for (j = 9; j >= 0; j--)
+			{
+				for (k = 0; temp_count2[j] > 0; temp_count2[j]--)
+				{
+					temp_num2[j][k] *= -1;
+					num[p_num++] = temp_num2[j][k++];
+				}
+			}
+			for (j = 0; j < 10; j++)
+			{
+				for (k = 0; temp_count1[j] > 0; temp_count1[j]--)
+					num[p_num++] = temp_num1[j][k++];
+			}
 		}
 		for (i = 0; i < 10; i++)
-			free(temp_num[i]);
-		free(temp_count);
+		{
+			free(temp_num1[i]);
+			free(temp_num2[i]);
+		}
+		free(temp_count1);
+		free(temp_count2);
 	}
 	else
 		printf("Error\n");
