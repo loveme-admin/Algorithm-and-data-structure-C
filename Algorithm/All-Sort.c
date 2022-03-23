@@ -1,9 +1,11 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-#define MAX 100//最大数组长度
-#define UP 200//范围上限
-#define DOWN -200//范围下限
+#include<sys/timeb.h>
+#define MAX 100000//最大数组长度
+#define UP 10000//范围上限
+#define DOWN -10000//范围下限
+
 void CreateList(int[], int);
 void PrintList(int[], int);
 void HelpList();
@@ -427,6 +429,7 @@ void Sort12(int num[], int length)
 int main(void)
 {
 	int num[MAX], i = 0;
+	struct timeb starttime, endtime;
 	srand((unsigned int)time(NULL));
 	HelpList();
 	while (1) {
@@ -434,6 +437,7 @@ int main(void)
 		scanf("%d", &i);
 		if (i == 0)
 			break;
+		ftime(&starttime);
 		switch (i)
 		{
 		case -1:HelpList(); break;
@@ -454,6 +458,8 @@ int main(void)
 		default:printf("Error\n");
 			break;
 		}
+		ftime(&endtime);
+		printf("time: %d ms\n",(endtime.time-starttime.time)*1000+(endtime.millitm-starttime.millitm));
 	}
 	return 0;
 }
