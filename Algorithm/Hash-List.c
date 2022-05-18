@@ -150,7 +150,7 @@ int main(void)
 				Insert_Block(head, Hash(data), data);
 			}
 		} break;
-		case 0:break;
+		case 0:return 0;break;
 		case -1: Help(); break;
 		default:printf("Num Not Found\n");
 			break;
