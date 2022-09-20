@@ -4,3 +4,5 @@
 #文件管理           File-Management.c
 #磁盘管理           Disk-Management.c
 #内存管理           Memory-Management.c
+#图形变换           Graph_draw.c
+#直线截取           Graph_cut.c
