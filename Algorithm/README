@@ -6,3 +6,5 @@
 #内存管理           Memory-Management.c
 #图形变换           Graph_draw.c
 #直线截取           Graph_cut.c
+#抛物生成           Graph_para.c
+#直线生成           Graph_create.c
