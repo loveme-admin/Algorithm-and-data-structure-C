@@ -1,9 +1,9 @@
-#排序算法           All-Sort.c
-#散列函数链地址     Hash-List.c
-#进程优先级管理     Priority-Scheduling.c
-#文件管理           File-Management.c
-#磁盘管理           Disk-Management.c
-#内存管理           Memory-Management.c
+#排序算法           Al_All_Sort.c
+#散列函数链地址     Al_Hash_List.c
+#进程优先级管理     OS_Priority_Scheduling.c
+#文件管理           OS_File_Management.c
+#磁盘管理           OS_Disk_Management.c
+#内存管理           OS_Memory_Management.c
 #图形变换           Graph_draw.c
 #直线截取           Graph_cut.c
 #抛物生成           Graph_para.c
