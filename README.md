@@ -1,4 +1,4 @@
-# SqList
+# 数据结构与算法
 
 ProjectName and Description
 
@@ -20,7 +20,7 @@ ProjectName and Description
   </a-->
   <h3 align="center">"SqlList</h3>
   <p align="center">
-    使用顺序结构模拟线性表
+    C语言代码库
     <br />
     <a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C"><strong>探索本项目的文档 »</strong></a>
     <br />
@@ -66,9 +66,10 @@ git clone https://github.com/loveme-admin/Algorithm-and-data-structure-C.git
 
 ```
 filetree 
-├── root.h
-├── exten.c
-├── main.c
+├── Data-Structure
+├── Algorithm
+├── Management-System
+├── Mini-Program
 └── README.md
 ```
 
