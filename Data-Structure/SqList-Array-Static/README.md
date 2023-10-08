@@ -1,4 +1,4 @@
-# SqList
+# SqList-Array-Static
 
 ProjectName and Description
 
@@ -18,7 +18,7 @@ ProjectName and Description
   <!--a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C/">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a-->
-  <h3 align="center">"SqlList</h3>
+  <h3 align="center">"SqList-Array-Static"</h3>
   <p align="center">
     使用顺序结构模拟线性表
     <br />
