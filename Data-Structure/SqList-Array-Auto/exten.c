@@ -12,6 +12,7 @@ Bool InitRandomList(SqList* list)
 {
 	if (list == NULL)
 		return FALSE;
+	list->data = (int*)malloc(sizeof(int) * MAXSIZE);
 	int count;
 	printf("Input Data Num:");
 	scanf("%d", &count);

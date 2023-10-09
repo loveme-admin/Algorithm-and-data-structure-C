@@ -18,6 +18,7 @@ Bool InitList(SqList* list)
 {
 	if (list == NULL)
 		return FALSE;
+	list->data = (int *)malloc(sizeof(int) * MAXSIZE);
 	for (int i = 0; i < MAXSIZE; i++)
 		list->data[i] = 0;
 	list->length = 0;
@@ -28,6 +29,7 @@ Bool DestoryList(SqList* list)
 {
 	if (list == NULL)
 		return FALSE;
+	free(list->data);
 	list->length = 0;
 	return TRUE;
 }

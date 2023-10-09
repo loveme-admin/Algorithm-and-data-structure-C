@@ -18,6 +18,6 @@ typedef int Bool;
 
 typedef int EleType;
 typedef struct SqList {
-	EleType data[MAXSIZE];
+	EleType *data;
 	int length;
 } SqList;
