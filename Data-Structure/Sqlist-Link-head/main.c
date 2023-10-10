@@ -4,24 +4,41 @@
 
 #include<time.h>
 
-void InitSqList(LNode **);
-LNode * BuildSqList(LNode*);
-void InputSqList(LNode*);
+Bool InitSqList(LNode **);
+Bool InsertTailSqList(LNode*);
 
-void InitSqList(LNode** head)
+Bool InitSqList(LNode** head)
 {
 	(*head) = (LNode*)malloc(sizeof(LNode));
+	if (*head == NULL)
+		return FALSE;
 	(*head)->next = NULL;
 	(*head)->data = 0;
+	return TRUE;
 }
 
-LNode* BuildLNode(LNode* head)
+Bool InsertTailLNode(LNode* head)
 {
-	LNode *temp = head->next;
-	head->next = (LNode*)malloc(sizeof(LNode));
-	head->next->next = temp;
-	head->data++;
-	return head->next;
+	if (head == NULL)
+		return FALSE;
+	LNode* temp = NULL;
+	LNode* tail = head;
+	EleType data = 0;
+	printf("Input Data:");
+	scanf("%d", &data);
+	while (data != -1)
+	{
+		temp = (LNode*)malloc(sizeof(LNode));
+		if (temp == NULL)
+			return FALSE;
+		tail->next = temp;
+		temp->data = data;
+		temp->next = NULL;
+		tail = tail->next;
+		head->data++;
+		scanf("%d", &data);
+	}
+	return TRUE;
 }
 
 LNode * BuildLNodeAlter(LNode* head)
@@ -69,15 +86,7 @@ int main(void)
 	LNode* temp = NULL;
 	ScanfQueue queue;
 	InitSqList(&head);
-	temp = BuildLNode(head);
-	InputSqList(temp);
-	temp=BuildLNodeAlter(head);
-	InputSqList(temp);
-	temp=BuildLNodeAlter(head);
-	InputSqList(temp);
-	temp=BuildLNode(head);
-	InputSqList(temp);
-	InsertLNode(head, 2);
+	InsertTailLNode(head);
 	PrintSqList(head);
 	return 0;
 }
