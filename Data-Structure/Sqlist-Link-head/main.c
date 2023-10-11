@@ -2,12 +2,11 @@
 #include<stdlib.h>
 #include"root.h"
 
-#include<time.h>
+Bool InitList(LNode **);
+Bool InsertTailList(LNode*);
+Bool InsertHeadList(LNode*);
 
-Bool InitSqList(LNode **);
-Bool InsertTailSqList(LNode*);
-
-Bool InitSqList(LNode** head)
+Bool InitList(LNode** head)
 {
 	(*head) = (LNode*)malloc(sizeof(LNode));
 	if (*head == NULL)
@@ -17,7 +16,41 @@ Bool InitSqList(LNode** head)
 	return TRUE;
 }
 
-Bool InsertTailLNode(LNode* head)
+Bool DestroyList(LNode** head)
+{
+	if (*head == NULL)
+		return FALSE;
+	LNode* temp = *head;
+	for (; temp != NULL; temp = *head)
+	{
+		(*head) = temp->next;
+		free(temp);
+	}
+	return TRUE;
+}
+
+Bool InsertHeadList(LNode* head)
+{
+	if (head == NULL)
+		return FALSE;
+	LNode* temp = NULL;
+	EleType data=0;
+	printf("Input Data:");
+	scanf("%d",&data);
+	while (data != -1)
+	{
+		temp = (LNode*)malloc(sizeof(LNode));
+		if (temp == NULL)
+			return FALSE;
+		temp->data = data;
+		temp->next = head->next;
+		head->next = temp;
+		scanf("%d",&data);
+	}
+	return TRUE;
+}
+
+Bool InsertTailList(LNode* head)
 {
 	if (head == NULL)
 		return FALSE;
@@ -41,52 +74,89 @@ Bool InsertTailLNode(LNode* head)
 	return TRUE;
 }
 
-LNode * BuildLNodeAlter(LNode* head)
+Bool PrintList(LNode* head)
 {
-	LNode* temp = head;
-	for (; temp->next != NULL; temp=temp->next);
-	temp->next= (LNode*)malloc(sizeof(LNode));
-	temp->next->next = NULL;
-	head->data++;
-	return temp->next;
-}
-
-void InputSqList(LNode* temp)
-{
-	printf("Input Data:");
-	scanf("%d",&(temp->data));
-}
-
-void PrintSqList(LNode* head)
-{
+	if (head == NULL)
+		return FALSE;
 	LNode* temp = head->next;
 	for (; temp!= NULL; temp = temp->next)
 	{
 		printf("%2d ",temp->data);
 	}
+	return TRUE;
 }
 
-void InsertLNode(LNode *head,int num)
+Bool InsertLNode(LNode *head,int num,EleType data)
 {
-	LNode* temp = head;
-	LNode* temp2, *temp3;
-	for (int i = 1; i < num; i++)
-		temp=temp->next;
-	temp2= (LNode*)malloc(sizeof(LNode));
-	InputSqList(temp2);
-	temp3=temp->next;
-	temp->next = temp2;
-	temp2->next = temp3;
-	head->data++;
+	if (head == NULL)
+		return FALSE;
+	if (num<1 || num>head->data)
+		return FALSE;
+	LNode* front = head;
+	LNode* temp = NULL;
+	for (int i = 1; i < num; i++, front = front->next);
+	temp = (LNode*)malloc(sizeof(LNode));
+	if (temp == NULL)
+		return FALSE;
+	temp->data = data;
+	temp->next = front->next;
+	front->next = temp;
+	return TRUE;
+}
+
+Bool MenuList(LNode** head, ScanfQueue* queue)
+{
+	while (TRUE) {
+		int num;
+		printf("Input Num:");
+		scanf("%d", &num);
+		switch (num) {
+		case 1: InitList(&head); break;
+		case 2: DestroyList(&head); break;
+		case 3:
+		{
+			printf("Input locate and data:");
+			ScanfPackage(queue, 2);
+			InsertLNode(head, queue->data[0], queue->data[1]);
+			break;
+		}
+		case 4:
+		{
+			//printf("Input locate:");
+			//ScanfPackage(queue, 1);
+			//DeleteElem(list, queue->data[0], &(queue->data[0]));
+			//break;
+		}
+		case 5:
+		{
+			//printf("Input data:");
+			//ScanfPackage(queue, 1);
+			//printf("%d\n", LocateElem(*list, queue->data[0]));
+			//break;
+		}
+		case 6:
+		{
+			//printf("Input locate:");
+			//ScanfPackage(queue, 1);
+			//printf("%d\n", GetElem(*list, queue->data[0]));
+			//break;
+		}
+
+		case 101: PrintList(head); break;
+		case 102: InitRandomList(&head); break;
+		case 0: HelpList(); break;
+		case -1:return OK; break;
+		default:printf("Num Error!\n");
+		}
+		printf("\n");
+	}
 }
 
 int main(void)
 {
 	LNode* head = NULL;
-	LNode* temp = NULL;
 	ScanfQueue queue;
-	InitSqList(&head);
-	InsertTailLNode(head);
-	PrintSqList(head);
+	HelpList();
+	MenuList(&head,&queue);
 	return 0;
 }
