@@ -3,8 +3,15 @@
 #include"root.h"
 
 Bool InitList(LNode **);
+Bool DestoryList(LNode**);
+
 Bool InsertTailList(LNode*);
 Bool InsertHeadList(LNode*);
+Bool InsertElem(LNode*, int, EleType);
+Bool DeleteElem(LNode*, int, EleType);
+
+Bool PrintList(LNode *);
+Bool MenuList(LNode **,ScanfQueue *);
 
 Bool InitList(LNode** head)
 {
@@ -74,19 +81,7 @@ Bool InsertTailList(LNode* head)
 	return TRUE;
 }
 
-Bool PrintList(LNode* head)
-{
-	if (head == NULL)
-		return FALSE;
-	LNode* temp = head->next;
-	for (; temp!= NULL; temp = temp->next)
-	{
-		printf("%2d ",temp->data);
-	}
-	return TRUE;
-}
-
-Bool InsertLNode(LNode *head,int num,EleType data)
+Bool InsertElem(LNode* head, int num, EleType data)
 {
 	if (head == NULL)
 		return FALSE;
@@ -104,6 +99,34 @@ Bool InsertLNode(LNode *head,int num,EleType data)
 	return TRUE;
 }
 
+Bool DeleteElem(LNode* head, int num, EleType data)
+{
+	if (head == NULL)
+		return FALSE;
+	if (num < 1 || num >head->data)
+		return FALSE;
+	LNode* front = head;
+	LNode* temp = NULL;
+	for (int i = 1; i < num; i++, front = front->next);
+	temp = front->next;
+	front->next = front->next->next;
+	free(temp);
+	head->data--;
+	return TRUE;
+}
+
+Bool PrintList(LNode* head)
+{
+	if (head == NULL)
+		return FALSE;
+	LNode* temp = head->next;
+	for (; temp!= NULL; temp = temp->next)
+	{
+		printf("%2d ",temp->data);
+	}
+	return TRUE;
+}
+
 Bool MenuList(LNode** head, ScanfQueue* queue)
 {
 	while (TRUE) {
@@ -117,15 +140,15 @@ Bool MenuList(LNode** head, ScanfQueue* queue)
 		{
 			printf("Input locate and data:");
 			ScanfPackage(queue, 2);
-			InsertLNode(head, queue->data[0], queue->data[1]);
+			InsertElem(head, queue->data[0], queue->data[1]);
 			break;
 		}
 		case 4:
 		{
-			//printf("Input locate:");
-			//ScanfPackage(queue, 1);
-			//DeleteElem(list, queue->data[0], &(queue->data[0]));
-			//break;
+			printf("Input locate:");
+			ScanfPackage(queue, 1);
+			DeleteElem(head, queue->data[0], &(queue->data[0]));
+			break;
 		}
 		case 5:
 		{
