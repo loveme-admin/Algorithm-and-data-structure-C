@@ -4,7 +4,7 @@
 #include"root.h"
 
 //辅助操作
-Bool InitRandomList(LNode*);            //随机初始化
+Bool InitRandomList(LNode**);            //随机初始化
 Bool ScanfPackage(ScanfQueue*, int);    //输入队列
 Bool HelpList();                        //帮助菜单
 
