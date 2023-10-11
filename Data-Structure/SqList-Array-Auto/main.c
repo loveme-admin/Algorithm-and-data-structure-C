@@ -4,7 +4,7 @@
 
 //基本操作
 Bool InitList(SqList*);                     //初始化线性表
-Bool DestorList(SqList*);                   //销毁线性表
+Bool DestroyList(SqList*);                   //销毁线性表
 //常用操作
 Bool InsertElem(SqList*, int, EleType);     //按位插入元素
 Bool DeleteElem(SqList*, int, EleType*);    //删除元素并返回值
@@ -25,7 +25,7 @@ Bool InitList(SqList* list)
 	return TRUE;
 }
 
-Bool DestoryList(SqList* list)
+Bool DestroyList(SqList* list)
 {
 	if (list == NULL)
 		return FALSE;
@@ -99,7 +99,7 @@ Bool MenuList(SqList* list, ScanfQueue* queue)
 		scanf("%d", &num);
 		switch (num) {
 		case 1: InitList(list); break;
-		case 2: DestoryList(list); break;
+		case 2: DestroyList(list); break;
 		case 3:
 		{
 			printf("Input locate and data:");
