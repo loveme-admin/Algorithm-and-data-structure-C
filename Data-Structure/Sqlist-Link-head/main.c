@@ -101,6 +101,7 @@ Bool InsertElem(LNode* head, int num, EleType data)
 	temp->data = data;
 	temp->next = front->next;
 	front->next = temp;
+	head->data++;
 	return TRUE;
 }
 
