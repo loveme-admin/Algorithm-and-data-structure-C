@@ -146,7 +146,7 @@ Bool PrintList(LNode* head)
 {
 	if (head == NULL)
 		return FALSE;
-	LNode* temp = head->next;
+	LNode* temp = head;
 	for (; temp!= NULL; temp = temp->next)
 	{
 		printf("%2d ",temp->data);

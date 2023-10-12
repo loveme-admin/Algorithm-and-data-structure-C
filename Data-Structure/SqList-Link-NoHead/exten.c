@@ -4,9 +4,9 @@
 #include"root.h"
 
 //辅助操作
-Bool InitRandomList(LNode*);            //随机初始化
-Bool ScanfPackage(ScanfQueue*, int);    //输入队列
-Bool HelpList();                        //帮助菜单
+Bool InitRandomList(LNode**);            //随机初始化
+Bool ScanfPackage(ScanfQueue*, int);     //输入队列
+Bool HelpList();                         //帮助菜单
 
 Bool InitRandomList(LNode** head)
 {
@@ -15,14 +15,14 @@ Bool InitRandomList(LNode** head)
 	*head = (LNode*)malloc(sizeof(LNode));
 	if (*head == NULL)
 		return FALSE;
-	(*head)->data = 0;
-	(*head)->next = NULL;
-	LNode* temp = NULL;
-	int count=0;
+	srand((unsigned)time(NULL));
+	int count = 0;
 	printf("Input Data Num:");
 	scanf("%d", &count);
-	srand((unsigned)time(NULL));
-	for (int i = 1; i <= count; i++)
+	(*head)->data = rand() % 100;
+	(*head)->next = NULL;
+	LNode* temp = NULL;
+	for (int i = 1; i < count; i++)
 	{
 		temp = (LNode*)malloc(sizeof(LNode));
 		if (temp == NULL)
@@ -30,7 +30,6 @@ Bool InitRandomList(LNode** head)
 		temp->data = rand() % 100;
 		temp->next = (*head)->next;
 		(*head)->next = temp;
-		(*head)->data++;
 	}
 	return TRUE;
 }
