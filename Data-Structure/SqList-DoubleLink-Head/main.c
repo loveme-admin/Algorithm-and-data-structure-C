@@ -23,6 +23,7 @@ Bool InitList(LNode** head)
 	if (*head == NULL)
 		return FALSE;
 	(*head)->next = NULL;
+	(*head)->front = NULL;
 	(*head)->data = 0;
 	return TRUE;
 }
@@ -56,6 +57,9 @@ Bool InsertHeadList(LNode* head)
 		temp->data = data;
 		temp->next = head->next;
 		head->next = temp;
+		temp->front = head;
+		if (temp->next != NULL)
+			temp->next->front = temp;
 		head ->data++;
 		scanf("%d",&data);
 	}
@@ -79,6 +83,7 @@ Bool InsertTailList(LNode* head)
 		tail->next = temp;
 		temp->data = data;
 		temp->next = NULL;
+		temp->front = tail;
 		tail = tail->next;
 		head->data++;
 		scanf("%d", &data);
