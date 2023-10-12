@@ -8,11 +8,11 @@ Bool InsertTailList(LNode**);            //头插法建立线性表
 Bool InsertHeadList(LNode**);            //尾插法建立线性表
 Bool InsertElem(LNode**, int, EleType);  //按位插入元素
 Bool DeleteElem(LNode**, int);           //删除元素并返回值
-LNode* LocateElem(LNode*, EleType);     //按值查找元素
-LNode* GetElem(LNode*, int);            //按位查找元素
+LNode* LocateElem(LNode*, EleType);      //按值查找元素
+LNode* GetElem(LNode*, int);             //按位查找元素
 //辅助操作
-Bool PrintList(LNode *);                //打印线性表
-Bool MenuList(LNode **,ScanfQueue *);   //菜单
+Bool PrintList(LNode *);                 //打印线性表
+Bool MenuList(LNode **,ScanfQueue *);    //菜单
 
 Bool DestroyList(LNode** head)
 {
@@ -45,7 +45,8 @@ Bool InsertHeadList(LNode** head)
 			(*head)->data = data;
 			(*head)->next = NULL;
 		}
-		else {
+		else 
+		{
 			temp = (LNode*)malloc(sizeof(LNode));
 			if (temp == NULL)
 				return FALSE;
@@ -78,7 +79,8 @@ Bool InsertTailList(LNode** head)
 			(*head)->next = NULL;
 			tail = *head;
 		}
-		else {
+		else 
+		{
 			temp = (LNode*)malloc(sizeof(LNode));
 			if (temp == NULL)
 				return FALSE;
@@ -109,7 +111,8 @@ Bool InsertElem(LNode** head, int num, EleType data)
 		temp->next = *head;
 		(*head) = temp;
 	}
-	else {
+	else 
+	{
 		for (int i = 2; i < num; i++, front = front->next);
 		temp = (LNode*)malloc(sizeof(LNode));
 		if (temp == NULL)
