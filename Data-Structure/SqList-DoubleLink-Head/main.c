@@ -105,7 +105,11 @@ Bool InsertElem(LNode* head, int num, EleType data)
 		return FALSE;
 	temp->data = data;
 	temp->next = front->next;
+	temp->front = front;
+	if (temp->next != NULL)
+		temp->next->front = temp;
 	front->next = temp;
+	head->data++;
 	return TRUE;
 }
 
@@ -120,6 +124,8 @@ Bool DeleteElem(LNode* head, int num)
 	for (int i = 1; i < num; i++, front = front->next);
 	temp = front->next;
 	front->next = front->next->next;
+	if(front->next!=NULL)
+		front->next->front = front;
 	free(temp);
 	head->data--;
 	return TRUE;
