@@ -151,6 +151,12 @@ Bool PrintList(LNode* head)
 	{
 		printf("%2d ",temp->data);
 	}
+	printf("\n");
+	for (temp = head; temp->next != NULL; temp = temp->next);
+	for (int i=0; i<head->data; i++,temp = temp->front)
+	{
+		printf("%2d ", temp->data);
+	}
 	return TRUE;
 }
 

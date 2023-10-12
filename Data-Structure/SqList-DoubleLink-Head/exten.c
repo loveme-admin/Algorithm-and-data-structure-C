@@ -17,6 +17,7 @@ Bool InitRandomList(LNode** head)
 		return FALSE;
 	(*head)->data = 0;
 	(*head)->next = NULL;
+	(*head)->front = NULL;
 	LNode* temp = NULL;
 	int count=0;
 	printf("Input Data Num:");
@@ -30,6 +31,9 @@ Bool InitRandomList(LNode** head)
 		temp->data = rand() % 100;
 		temp->next = (*head)->next;
 		(*head)->next = temp;
+		temp->front = *head;
+		if(temp->next!=	NULL)
+			temp->next->front = temp;
 		(*head)->data++;
 	}
 	return TRUE;

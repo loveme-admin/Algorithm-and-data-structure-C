@@ -20,4 +20,5 @@ typedef int EleType;
 typedef struct LNode {
 	EleType data;
 	struct LNode* next;
+	struct LNode* front;
 } LNode;
