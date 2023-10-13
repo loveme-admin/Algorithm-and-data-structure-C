@@ -47,18 +47,18 @@ Bool OrderElem(LNode* head, EleType data)
 		return FALSE;
 	if (head->data >= MAXSIZE-1)
 		return FALSE;
-	LNode *temp=head;
-	LNode *node=NULL;
+	LNode *tail=head;
+	LNode *temp=NULL;
 	for (int i = 1; i < MAXSIZE; i++)
 		if ((head + i)->next == -2)
 		{
-			node = head + i;
+			temp = head + i;
 			break;
 		}
-	for (; temp->next != -1; temp = head+temp->next);
-	node->data = data;
-	node->next = -1;
-	temp->next = node - head;
+	for (; tail->next != -1; tail = head+tail->next);
+	temp->data = data;
+	temp->next = -1;
+	tail->next = temp - head;
 	head->data++;
 	return TRUE;
 }
