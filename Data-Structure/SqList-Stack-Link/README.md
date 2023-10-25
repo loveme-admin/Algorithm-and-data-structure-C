@@ -1,4 +1,4 @@
-# 数据结构
+# SqList-Stack-Link
 
 ProjectName and Description
 
@@ -18,9 +18,9 @@ ProjectName and Description
   <!--a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C/">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a-->
-  <h3 align="center">"数据结构"</h3>
+  <h3 align="center">"SqList-Stack-Link"</h3>
   <p align="center">
-    数据结构
+    使用链式结构模拟线性表
     <br />
     <a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C"><strong>探索本项目的文档 »</strong></a>
     <br />
@@ -66,15 +66,9 @@ git clone https://github.com/loveme-admin/Algorithm-and-data-structure-C.git
 
 ```
 filetree 
-├── SqList-Array-Static
-├── SqList-Array-Auto
-├── SqList-Link-Head
-├── SqList-Link-NoHead
-├── SqList-DoubleLink-Head
-├── SqList-LoopLink-Head
-├── SqList-StaticLink-Array
-├── SqList-Stack-Array
-├── SqList-Stack-Link
+├── root.h
+├── exten.c
+├── main.c
 └── README.md
 ```
 
