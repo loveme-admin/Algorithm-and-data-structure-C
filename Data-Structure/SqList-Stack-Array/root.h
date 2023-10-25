@@ -17,7 +17,7 @@ typedef struct ScanfQueue {
 typedef int Bool;
 
 typedef int EleType;
-typedef struct SqList {
+typedef struct SqStack {
 	EleType data[MAXSIZE];
-	int length;
-} SqList;
+	int top;
+} SqStack;

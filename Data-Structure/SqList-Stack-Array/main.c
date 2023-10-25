@@ -3,133 +3,92 @@
 #include"root.h"
 
 //基本操作
-Bool InitList(SqList*);                     //初始化线性表
-Bool DestroyList(SqList*);                   //销毁线性表
+Bool InitStack(SqStack*);                     //初始化线性表
+Bool DestroyStack(SqStack*);                  //销毁线性表
 //常用操作
-Bool InsertElem(SqList*, int, EleType);     //按位插入元素
-Bool DeleteElem(SqList*, int, EleType*);    //删除元素并返回值
-int LocateElem(SqList, EleType);            //按值查找元素
-EleType GetElem(SqList, int);               //按位查找元素
+Bool Push(SqStack*, EleType);            //压栈
+Bool Pop(SqStack*, EleType*);            //弹栈
 //辅助操作
-Bool PrintList(SqList);                     //打印线性表
-Bool MenuList(SqList*, ScanfQueue*);        //菜单
+Bool PrintStack(SqStack);                     //打印线性表
+Bool MenuStack(SqStack*, ScanfQueue*);        //菜单
 
-Bool InitList(SqList* list)
+Bool InitStack(SqStack* stack)
 {
-	if (list == NULL)
+	if (stack == NULL)
 		return FALSE;
 	for (int i = 0; i < MAXSIZE; i++)
-		list->data[i] = 0;
-	list->length = 0;
+		stack->data[i] = 0;
+	stack->top = -1;
 	return TRUE;
 }
 
-Bool DestroyList(SqList* list)
+Bool DestroyStack(SqStack* stack)
 {
-	if (list == NULL)
+	if (stack == NULL)
 		return FALSE;
-	list->length = 0;
+	stack->top = -1;
 	return TRUE;
 }
 
-Bool InsertElem(SqList* list, int num, EleType data)
+Bool Push(SqStack* stack ,EleType data)
 {
-	if (list == NULL)
+	if (stack == NULL)
 		return FALSE;
-	if (num<1 || num>list->length + 1)
+	if (stack->top == MAXSIZE - 1)
 		return FALSE;
-	if (list->length >= MAXSIZE)
-		return FALSE;
-	for (int i = list->length; i >= num; i--)
-		list->data[i] = list->data[i - 1];
-	list->data[num - 1] = data;
-	list->length++;
+	stack->top++;
+	stack->data[stack->top] = data;
 	return TRUE;
 }
 
-Bool DeleteElem(SqList* list, int num, EleType* data)
+Bool Pop(SqStack* stack, EleType * data)
 {
-	if (list == NULL)
+	if (stack == NULL)
 		return FALSE;
-	if (num<1 || num>list->length)
+	if (stack->top == -1)
 		return FALSE;
-	*data = list->data[num - 1];
-	for (int i = num; i < list->length; i++)
-		list->data[i - 1] = list->data[i];
-	list->length--;
+	*data=stack->data[stack->top];
+	stack->top--;
 	return TRUE;
 }
 
-int LocateElem(SqList list, EleType data)
+Bool PrintStack(SqStack stack)
 {
-	if (list.data == NULL)
+	if (stack.data == NULL)
 		return FALSE;
-	for (int i = 0; i < list.length; i++)
-		if (list.data[i] == data)
-			return i + 1;
-	return FALSE;
-}
-
-EleType GetElem(SqList list, int num)
-{
-	if (list.data == NULL)
-		return FALSE;
-	if (num<1 || num>list.length)
-		return FALSE;
-	return list.data[num - 1];
-}
-
-Bool PrintList(SqList list)
-{
-	if (list.data == NULL)
-		return FALSE;
-	for (int i = 0; i < list.length; i++)
-		printf("%2d ", list.data[i]);
+	for (int i = 0; i <= stack.top; i++)
+		printf("%2d ", stack.data[i]);
 	printf("\n");
 	return TRUE;
 }
 
-Bool MenuList(SqList* list, ScanfQueue* queue)
+Bool MenuStack(SqStack* stack, ScanfQueue* queue)
 {
 	while (TRUE) {
 		int num;
 		printf("Input Num:");
 		scanf("%d", &num);
 		switch (num) {
-		case 1: InitList(list); break;
-		case 2: DestroyList(list); break;
+		case 1: InitStack(stack); break;
+		case 2: DestroyStack(stack); break;
 		case 3:
 		{
-			printf("Input locate and data:");
-			ScanfPackage(queue, 2);
-			InsertElem(list, queue->data[0], queue->data[1]);
+			printf("Input data:");
+			ScanfPackage(queue, 1);
+			Push(stack, queue->data[0]);
 			break;
 		}
 		case 4:
 		{
-			printf("Input locate:");
-			ScanfPackage(queue, 1);
-			DeleteElem(list, queue->data[0], &(queue->data[0]));
-			break;
-		}
-		case 5:
-		{
-			printf("Input data:");
-			ScanfPackage(queue, 1);
-			printf("%d\n", LocateElem(*list, queue->data[0]));
-			break;
-		}
-		case 6:
-		{
-			printf("Input locate:");
-			ScanfPackage(queue, 1);
-			printf("%d\n", GetElem(*list, queue->data[0]));
+			queue->length++;
+			Pop(stack, &(queue->data[0]));
+			printf("%d\n", queue->data[0]);
 			break;
 		}
 
-		case 101: PrintList(*list); break;
-		case 102: InitRandomList(list); break;
-		case 0: HelpList(); break;
+		case 101: PrintStack(*stack); break;
+		case 102: InitRandomStack(stack); break;
+		case 0: HelpStack(); break;
 		case -1:return OK; break;
 		default:printf("Num Error!\n");
 		}
@@ -139,9 +98,9 @@ Bool MenuList(SqList* list, ScanfQueue* queue)
 
 int main(void)
 {
-	SqList list;
+	SqStack stack;
 	ScanfQueue queue;
-	HelpList();
-	MenuList(&list, &queue);
+	HelpStack();
+	MenuStack(&stack, &queue);
 	return 0;
 }
