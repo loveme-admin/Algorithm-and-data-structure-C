@@ -4,48 +4,6 @@
 #include"root.h"
 
 //辅助操作
-Bool InitRandomList(LNode**);            //随机初始化
-Bool ScanfPackage(ScanfQueue*, int);    //输入队列
-Bool HelpList();                        //帮助菜单
-
-Bool InitRandomList(LNode** head)
-{
-	if (head == NULL)
-		return FALSE;
-	*head = (LNode*)malloc(sizeof(LNode));
-	if (*head == NULL)
-		return FALSE;
-	(*head)->data = 0;
-	(*head)->next = NULL;
-	LNode* temp = NULL;
-	int count=0;
-	printf("Input Data Num:");
-	scanf("%d", &count);
-	srand((unsigned)time(NULL));
-	for (int i = 1; i <= count; i++)
-	{
-		temp = (LNode*)malloc(sizeof(LNode));
-		if (temp == NULL)
-			return FALSE;
-		temp->data = rand() % 100;
-		temp->next = (*head)->next;
-		(*head)->next = temp;
-		(*head)->data++;
-	}
-	return TRUE;
-}
-
-Bool ScanfPackage(ScanfQueue* queue, int num)
-{
-	if (queue == NULL)
-		return FALSE;
-	if (num<1 || num>MAXSIZE)
-		return FALSE;
-	for (int i = 0; i < num; i++)
-		scanf("%d", &(queue->data[i]));
-	queue->length = num;
-	return TRUE;
-}
 
 Bool HelpList()
 {

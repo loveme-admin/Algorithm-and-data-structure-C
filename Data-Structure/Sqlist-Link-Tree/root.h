@@ -16,8 +16,8 @@ typedef struct ScanfQueue {
 
 typedef int Bool;
 
-typedef int EleType;
-typedef struct LNode {
+typedef char EleType;
+typedef struct TNode {  
 	EleType data;
-	struct LNode* next;
-} LNode;
+	struct TNode* lchild,*rchild;
+} TNode;
