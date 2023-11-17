@@ -1,4 +1,4 @@
-# SqList-Queue-Array
+# Link-List-LoopLink-Head
 
 ProjectName and Description
 
@@ -18,9 +18,9 @@ ProjectName and Description
   <!--a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C/">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a-->
-  <h3 align="center">"SqList-Queue-Array"</h3>
+  <h3 align="center">"Link-List-LoopLink-Head"</h3>
   <p align="center">
-    使用顺序结构模拟线性表
+    数据结构
     <br />
     <a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C"><strong>探索本项目的文档 »</strong></a>
     <br />

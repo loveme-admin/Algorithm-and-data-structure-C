@@ -20,7 +20,7 @@ ProjectName and Description
   </a-->
   <h3 align="center">"数据结构与算法"</h3>
   <p align="center">
-    C语言代码库
+    数据结构与算法
     <br />
     <a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C"><strong>探索本项目的文档 »</strong></a>
     <br />

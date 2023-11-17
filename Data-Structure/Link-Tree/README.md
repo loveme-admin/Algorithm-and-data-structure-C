@@ -1,4 +1,4 @@
-# 数据结构
+# Link-Tree
 
 ProjectName and Description
 
@@ -18,7 +18,7 @@ ProjectName and Description
   <!--a href="https://github.com/loveme-admin/Algorithm-and-data-structure-C/">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a-->
-  <h3 align="center">"数据结构"</h3>
+  <h3 align="center">"Link-Tree"</h3>
   <p align="center">
     数据结构
     <br />
@@ -66,19 +66,9 @@ git clone https://github.com/loveme-admin/Algorithm-and-data-structure-C.git
 
 ```
 filetree 
-├── Sequence-Graph
-├── Sequence-List-Auto
-├── Sequence-List-Quence
-├── Sequence-List-Stack
-├── Sequence-List-Static
-├── Sequence-List-StaticLink
-├── Link-List-Double-Head
-├── Link-List-Head
-├── Link-List-LoopLink-Head
-├── Link-List-NoHead
-├── Link-List-Queue
-├── Link-List-Stack
-├── Link-Tree
+├── root.h
+├── exten.c
+├── main.c
 └── README.md
 ```
 
